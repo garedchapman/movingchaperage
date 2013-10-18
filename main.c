@@ -1,5 +1,5 @@
 #include <msp430.h> 
-#include "MovingAverages_header.h"
+#include "moving_average.h"
 /*
  * C2C Gared Chapman
  * Moving Averages Main.c
@@ -7,7 +7,6 @@
  */
 int main(void) {
     WDTCTL = WDTPW | WDTHOLD;	// Stop watchdog timer
-
 
     char inputArray[] = {45, 42, 41, 40, 43, 45, 46, 47, 49, 45};
     char arrayLength = sizeof(inputArray);
@@ -19,14 +18,13 @@ int main(void) {
     char maximum = max(inputArray,arrayLength);
     char range = getRange(inputArray,arrayLength);									//Get max, min, range
 
-
-//Do-While loop in case N_AVG_SAMPLES is 2, ensures it runs at least once.
+    //Do-While loop in case N_AVG_SAMPLES is 2, ensures it runs at least once.
     while(inputTracker < sizeof(inputArray)){
 
-    	do{
+    	do {
     		movingAverageArray[littleAverageTracker] = movingAverageArray[littleAverageTracker+1];
     		littleAverageTracker++;
-    	}while(littleAverageTracker < N_AVG_SAMPLES - 1);
+    	} while(littleAverageTracker < N_AVG_SAMPLES - 1);
 
     	littleAverageTracker = 0;
 
@@ -35,9 +33,8 @@ int main(void) {
     	outputArray[inputTracker] = getAverage(movingAverageArray);
 
     	inputTracker++;
-
     }
-    while(1){
-    	}
+
+    while(1){}
 }
 
