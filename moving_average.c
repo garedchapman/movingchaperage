@@ -1,6 +1,6 @@
-#include "MovingAverages_header.h"
+#include "moving_average.h"
 /*
- * movingaverage_implement.c
+ * moving_average.c
  *
  *  Created on: Oct 16, 2013
  *      Author: C15Gared.Chapman
@@ -13,10 +13,12 @@ char getAverage(char array[]){
 	int average = 0;
 
 	while(count < N_AVG_SAMPLES){
+        additionResult = additionResult + array[count];
+        count++;
+    }
 
-	additionResult = additionResult + array[count];
-	count++;}
 	average = additionResult/N_AVG_SAMPLES ;
+
 	return average;
 }
 
@@ -25,22 +27,24 @@ char max(char array[], char arrayLength){
 
 	int step = 0;
 	int max = 0;
+
 	while (step < arrayLength-1) {
 
 		if(array[step] > max) {
 			max = array[step];
 		}
 
-	step++;
+        step++;
 	}
 
 	return max;
-	}
+}
 
 char min(char array[], char arrayLength) {
 
 	int step = 0;
 	int min = 0xFF;
+
 	while (step < arrayLength-1) {
 
 		if (array[step] < min) {
@@ -50,6 +54,7 @@ char min(char array[], char arrayLength) {
 		step++;
 
 	}
+
 	return min;
 }
 
